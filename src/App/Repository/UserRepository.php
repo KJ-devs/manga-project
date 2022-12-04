@@ -9,6 +9,15 @@ class UserRepository extends EntityRepository
 {
     public function findOneByEmail(string $email): User
     {
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
+        $phone_number = $_POST['phone_number'];
+        $password = $_POST['password'];
+        
+       
+
         // DQL way
         /*$dql = 'SELECT u FROM ' . User::class . ' u WHERE u.email=:email';
         $query= $this->_em->createQuery($dql);

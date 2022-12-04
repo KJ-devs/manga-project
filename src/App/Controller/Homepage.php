@@ -12,16 +12,16 @@ class Homepage
 {
   public function __invoke()
   {
-      //   $em = EntityManager::getInstance();
+        // $em = EntityManager::getInstance();
 
-      //   $user = new User();
-      //   $user
-      //       ->setFirstName('Boris')
-      //       ->setLastName('CERATI')
-      //       ->setEmail('cerati.boris@gmail.com');
+        //  $user = new User();
+        //  $user
+        //      ->setFirstName('Boris')
+        //      ->setLastName('CERATI')
+        //      ->setEmail('cerati.boris@gmail.com');
 
-      //   $em->persist($user);
-      //   $em->flush();
+        //  $em->persist($user);
+        //  $em->flush();
 
       //   /** @var UserRepository$userRepository */
       // $userRepository = $em->getRepository(User::class);
