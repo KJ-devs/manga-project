@@ -32,7 +32,7 @@ class Register {
         $em->persist($user);
         $em->flush();
       }
-      echo $errors;
+     
     }
     return new Response('register.html.twig', ['errors' => $errors]);
   }

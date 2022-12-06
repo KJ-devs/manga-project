@@ -13,13 +13,16 @@ class Manga {
     #[ORM\GeneratedValue]
     protected int $id;
 
+    // #[ORM\ManyToMany(targetEntity: Category::class)]
+    // private Category $category;
+
     #[ORM\Column(type: 'string', length: 255)]
     protected string $title;
 
     #[ORM\Column(type: 'string', length: 255)]
     protected string $description;
 
-    #[ORM\Column(type: 'string', unique: true)]
+    #[ORM\Column(type: 'float',length: 255)]
     protected string $averageRating;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -100,4 +103,14 @@ class Manga {
 
         return $this;
     }
+
+    // public function getcategory(): Category {
+    //     return $this->category;
+    // }
+
+    // public function setcategory(Category $category): Manga {
+    //     $this->category = $category;
+
+    //     return $this;
+    // }
 }
