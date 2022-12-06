@@ -7,11 +7,14 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 use Framework\Doctrine\EntityManager;
 use Framework\Response\Response;
+use App\script\insertManga;
 
 class Homepage
 {
   public function __invoke()
   {
+      $inserData = new insertManga;
+      $inserData->insertMangaToDataBase();
         // $em = EntityManager::getInstance();
 
         //  $user = new User();
