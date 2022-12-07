@@ -8,43 +8,16 @@ use Doctrine\ORM\EntityRepository;
 class MangaRepository extends EntityRepository
 {
 
-    public function findAllManga()
-    {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery(
-            'SELECT m
-            FROM App\Entity\Manga m
-            ORDER BY m.id ASC'
-        );
+    public function findOneByTitle(string $title): Manga {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->select('m')
+            ->from(Manga::class, 'm')
+            ->where('m.title= :title')
+            ->setParameter('title', $title);
 
-        return $query->getResult();
+        return $queryBuilder->getQuery()->getSingleResult();
     }
+
     
-    // public function findOneByEmail(string $email): Manga
-    // {
-    //     $first_name = $_POST['first_name'];
-    //     $last_name = $_POST['last_name'];
-    //     $email = $_POST['email'];
-    //     $address = $_POST['address'];
-    //     $phone_number = $_POST['phone_number'];
-    //     $password = $_POST['password'];
-        
-
-    //     // DQL way
-    //     /*$dql = 'SELECT u FROM ' . User::class . ' u WHERE u.email=:email';
-    //     $query= $this->_em->createQuery($dql);
-    //     $query->setParameter('email', $email);
-
-    //     return $query->getSingleResult();*/
-
-    //     // query builder WAY
-    //     $queryBuilder = $this->_em->createQueryBuilder();
-    //     $queryBuilder
-    //         ->select('u')
-    //         ->from(User::class, 'u')
-    //         ->where('u.email = :email')
-    //         ->setParameter('email', $email);
-
-    //     return $queryBuilder->getQuery()->getSingleResult();
-    // }
 }

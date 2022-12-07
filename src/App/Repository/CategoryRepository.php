@@ -8,13 +8,13 @@ use Doctrine\ORM\EntityRepository;
 class CategoryRepository extends EntityRepository {
 
     // find single category by libellé
-    public function findOneByCategoryTitle(string $categoryTitle): Category {
+    public function findOneByTitle(string $title): Category {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
             ->select('c')
             ->from(Category::class, 'c')
-            ->where('c.categoryTitle = :CategoryTitle')
-            ->setParameter('CategoryTitle', $categoryTitle);
+            ->where('c.categoryTitle = :categoryTitle')
+            ->setParameter('categoryTitle', $title);
 
         return $queryBuilder->getQuery()->getSingleResult();
     }

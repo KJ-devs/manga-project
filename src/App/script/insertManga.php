@@ -5,6 +5,7 @@ namespace App\script;
 use App\Entity\Manga;
 use App\Entity\Category;
 use App\Entity\CategoryManga;
+use App\Repository\CategoryRepository;
 // use App\Repository\MangaRepository;
 // use Doctrine\ORM\EntityRepository;
 
@@ -58,7 +59,6 @@ class insertManga {
                     $categoryList[] = $category->attributes->title;
                     // supprime tout les doublons de catégories
                     $listOfUniqueCategory = array_unique($categoryList);
-                   
                 }
             }
         }
@@ -68,12 +68,19 @@ class insertManga {
             $categoryManager->setcategoryTitle($value);
             $em->persist($categoryManager);
             $em->flush();
+            
         }
     }
+
+    // function that insert the categories of each manga in the table category_manga from the database and checking if the mangas has this category on the api kitsu
+
+
+
     // function that insert the categories of each manga in the table manga_category with api kitsu
     function insertCategoryOfEachManga() {
         $em = EntityManager::getInstance();
         $i = 0;
+ 
         for ($i; $i < 100; $i += 20) {
             $urlmanga = 'https://kitsu.io/api/edge/manga?page[limit]=20&page[offset]=' . $i;
             $json = file_get_contents($urlmanga);
@@ -85,18 +92,19 @@ class insertManga {
                 $json = file_get_contents($urlcategories);
                 $obj = json_decode($json);
                 $categories = $obj->data;
-                // récupère toutes les catégories d'un manga
+                
                 foreach ($categories as $category) {
-                    // $mangaManager = $em->getRepository(Manga::class)->findOneBy(['title' => $manga->attributes->canonicalTitle]);
-                    $categoryMangaManager = new CategoryManga();
-                    $categoryMangaManager->setMangaId($manga->id);
-                    $categoryMangaManager->setCategoryId($category->id);
-                    $em->persist($categoryMangaManager);
+                   
+                   $mangax = $em->getRepository(Manga::class)->findOneByTitle($manga->attributes->canonicalTitle);
+                   $categoryx = $em->getRepository(Category::class)->findOneByTitle($category->attributes->title);
+                   
+                    $categoryManga = new CategoryManga($mangax, $categoryx);
+                    $em->persist($categoryManga);
                     $em->flush();
                 }
-               
             }
         }
+        
     }
-   
+
 }

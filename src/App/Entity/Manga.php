@@ -13,9 +13,6 @@ class Manga {
     #[ORM\GeneratedValue]
     protected int $id;
 
-    // #[ORM\ManyToMany(targetEntity: Category::class)]
-    // private Category $category;
-
     #[ORM\Column(type: 'string', length: 255)]
     protected string $title;
 
@@ -104,13 +101,5 @@ class Manga {
         return $this;
     }
 
-    // public function getcategory(): Category {
-    //     return $this->category;
-    // }
-
-    // public function setcategory(Category $category): Manga {
-    //     $this->category = $category;
-
-    //     return $this;
-    // }
+   
 }
