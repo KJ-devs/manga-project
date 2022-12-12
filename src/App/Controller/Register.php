@@ -31,6 +31,7 @@ class Register {
         $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $em->persist($user);
         $em->flush();
+        header('Location: /login');
       }
      
     }

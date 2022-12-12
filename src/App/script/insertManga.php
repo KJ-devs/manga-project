@@ -5,9 +5,7 @@ namespace App\script;
 use App\Entity\Manga;
 use App\Entity\Category;
 use App\Entity\CategoryManga;
-use App\Repository\CategoryRepository;
-// use App\Repository\MangaRepository;
-// use Doctrine\ORM\EntityRepository;
+
 
 use Framework\Doctrine\EntityManager;
 
@@ -29,7 +27,7 @@ class insertManga {
                 $mangaManager->setTitle($manga->attributes->canonicalTitle);
                 $mangaManager->setdescription($manga->attributes->description);
                 $mangaManager->setaverageRating($manga->attributes->averageRating || null);
-                $mangaManager->setposterImage($manga->attributes->posterImage->tiny);
+                $mangaManager->setposterImage($manga->attributes->posterImage->medium);
                 $mangaManager->setprix(rand(1, 20));
                 $mangaManager->setstock(rand(0, 150));
                 $em->persist($mangaManager);
@@ -72,11 +70,7 @@ class insertManga {
         }
     }
 
-    // function that insert the categories of each manga in the table category_manga from the database and checking if the mangas has this category on the api kitsu
-
-
-
-    // function that insert the categories of each manga in the table manga_category with api kitsu
+  
     function insertCategoryOfEachManga() {
         $em = EntityManager::getInstance();
         $i = 0;

@@ -31,10 +31,10 @@ class Manga {
     #[ORM\Column(type: 'string', length: 255)]
     protected string $stock;
 
-    public function getId(): int {
+  
+    public function getid() : int {
         return $this->id;
     }
-
     public function setId(int $id): Manga {
         $this->id = $id;
 
@@ -100,6 +100,8 @@ class Manga {
 
         return $this;
     }
+    
+ 
 
    
 }

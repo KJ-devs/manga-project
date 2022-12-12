@@ -7,21 +7,26 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 use Framework\Doctrine\EntityManager;
 use Framework\Response\Response;
-
-class Homepage
+use App\Utils\verifLogin;
+class Login
 {
   public function __invoke()
   {
-         $em = EntityManager::getInstance();
-
-        $user = new User();
-          
-
-         /** @var UserRepository$userRepository */
-       $userRepository = $em->getRepository(User::class);
-       $users = $userRepository->findAll();
-       $user = $userRepository->findOneByEmail('cerati.boris@gmail.com');
-
-      return new Response('login.html.twig');
+      $errors = [];
+     
+      $verifLogin = new verifLogin();
+      if(isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password'])) {
+          if(!empty($verifLogin->verifLogin()) ) {
+              $errors = $verifLogin->getErrors();
+          } else {
+              session_start();
+              $em = EntityManager::getInstance();
+              $user = $em->getRepository(User::class)->findOneByEmail($_POST['email']);
+              $_SESSION['user'] = $user;
+              header('Location: /');
+          }
+        }
+       return new Response('login.html.twig', ['errors' => $errors]);
+   
   }
 }

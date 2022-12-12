@@ -13,25 +13,25 @@ class User {
     #[ORM\GeneratedValue]
     protected int $id;
 
-    #[ORM\Column(type: 'string', length: 50 )]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $firstName;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $lastName;
 
     #[ORM\Column(type: 'string', unique: true)]
     protected string $email;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $password;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $address;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $city;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $zipCode;
 
     public function getId(): int {
