@@ -15,6 +15,12 @@ use App\Entity\Category;
 
 class Homepage {
   public function __invoke() {
+    $em = EntityManager::getInstance();
+    $manga = new insertManga();
+    // $manga->insertMangaToDataBase();
+    // $manga->insertMangaCategories();
+    // $manga->insertCategoryOfEachManga();
+
     session_start();
     $userRole = null;
     if(isset($_SESSION['user'])) {
