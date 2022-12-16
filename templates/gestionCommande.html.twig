@@ -52,8 +52,17 @@
 						<td>{{commande.dateCommande}}</td>
 						<td><select name="statutCommande"style="object-fit:cover;">
                             <option value="{{commande.statutCommande}}" selected >{{commande.statutCommande}}</option>
-							<option value="Livrer">Livrer</option>
-                            <option value="En Livraison">En Livraison</option>
+							{% if commande.statutCommande == "En Livraison" %}
+								<option value="Livrer">Livrer</option>
+							{% endif %}
+							{% if commande.statutCommande == "Livrer" %}
+								<option value="En Livraison">En Livraison</option>
+							{% endif %}
+							{% if commande.statutCommande == "en cours" %}
+								<option value="En Livraison">En Livraison</option>
+								<option value="Livrer">Livrer</option>
+							{% endif %}
+
                             </select></td>
 						<td>{{commande.prixCommande}} € </td>						
 						<td>{{commande.prixLivraison}} €</td>
