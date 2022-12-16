@@ -24,6 +24,9 @@ class Panier {
             header('Location: /');
             exit();
         };
+        if(!isset($_SESSION['panier'])){
+            $_SESSION['panier'] = [];
+        }
         $id = array_keys($_SESSION['panier']);
         foreach ($id as $idManga) {
             $manga = $em->getRepository(Manga::class);
@@ -86,7 +89,8 @@ class Panier {
                     $em->persist($commandeManga);
                     $em->flush();
             }
-            
+            unset($_SESSION['panier']);
+            header("Refresh:0");
             
             echo '<script>alert("Votre commande a bien été prise en compte")</script>';
         }
