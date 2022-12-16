@@ -34,6 +34,9 @@ class User {
     #[ORM\Column(type: 'string', length: 255)]
     protected string $zipCode;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    protected string $role;
+
     public function getId(): int {
         return $this->id;
     }
@@ -113,4 +116,17 @@ class User {
 
         return $this;
     }
+
+    public function getRole(): string {
+        return $this->role;
+    }
+
+    public function setRole(string|null $role): User|null {
+        $this->role = $role;
+
+        return $this;
+    }
+   
+
+
 }

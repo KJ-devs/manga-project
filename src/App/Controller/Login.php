@@ -11,14 +11,10 @@ use App\Utils\verifLogin;
 class Login
 {
   public function __invoke()
-  {
-      $errors = [];
-     
+  {  
       $verifLogin = new verifLogin();
-      if(isset($_POST['login']) && !empty($_POST['email']) && !empty($_POST['password'])) {
-          if(!empty($verifLogin->verifLogin()) ) {
-              $errors = $verifLogin->getErrors();
-          } else {
+      if(isset($_POST['login']) ) {
+          if(empty($verifLogin->verifLogin()) ) {
               session_start();
               $em = EntityManager::getInstance();
               $user = $em->getRepository(User::class)->findOneByEmail($_POST['email']);
@@ -26,7 +22,7 @@ class Login
               header('Location: /');
           }
         }
-       return new Response('login.html.twig', ['errors' => $errors]);
+       return new Response('login.html.twig', ['errors' => $verifLogin->getErrors()]);
    
   }
 }

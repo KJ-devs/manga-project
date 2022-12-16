@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MangaRepository;
+use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MangaRepository::class)]
@@ -20,7 +21,7 @@ class Manga {
     protected string $description;
 
     #[ORM\Column(type: 'float',length: 255)]
-    protected string $averageRating;
+    protected float $averageRating;
 
     #[ORM\Column(type: 'string', length: 255)]
     protected string $posterImage;
@@ -61,11 +62,11 @@ class Manga {
         return $this;
     }
 
-    public function getaverageRating(): string {
+    public function getaverageRating(): float {
         return $this->averageRating;
     }
 
-    public function setaverageRating(string $averageRating): Manga {
+    public function setaverageRating(float $averageRating): Manga {
         $this->averageRating = $averageRating;
 
         return $this;

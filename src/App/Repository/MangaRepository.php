@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\CategoryManga;
 use App\Entity\Manga;
 use Doctrine\ORM\EntityRepository;
 
@@ -77,6 +78,55 @@ class MangaRepository extends EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+    public function deleteManga($id) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->delete(Manga::class, 'm')
+            ->where('m.id = :id')
+            ->setParameter('id', $id);
 
-    
+        return $queryBuilder->getQuery()->getResult();
+    }   
+   
+    public function getMangaByCategoryName($category) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->select('m')
+            ->from(Manga::class, 'm')
+            ->join(CategoryManga::class, 'cm')
+            ->where('m.id = cm.manga AND cm.category = :category_id')
+            ->setParameter('category_id', $category);
+        return $queryBuilder->getQuery()->getResult();
+    }
+ 
+    public function getMangaByLowPrice($price) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->select('m')
+            ->from(Manga::class, 'm')
+            ->where('m.prix < :prix')
+            ->setParameter('prix', $price);
+        return $queryBuilder->getQuery()->getResult();
+    }
+    public function getMangaByCategoryNameAndPrice($category, $price) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->select('m')
+            ->from(Manga::class, 'm')
+            ->join(CategoryManga::class, 'cm')
+            ->where('m.id = cm.manga AND cm.category = :category_id AND m.prix < :prix')
+            ->setParameter('category_id', $category)
+            ->setParameter('prix', $price);
+        return $queryBuilder->getQuery()->getResult();
+    }
+    public function getMangaByhighPrice($price) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->select('m')
+            ->from(Manga::class, 'm')
+            ->where('m.prix > :prix')
+            ->setParameter('prix', $price);
+        return $queryBuilder->getQuery()->getResult();
+    }
+ 
 }

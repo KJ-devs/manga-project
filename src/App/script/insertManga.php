@@ -27,7 +27,7 @@ class insertManga {
                 $mangaManager->setTitle($manga->attributes->canonicalTitle);
                 $mangaManager->setdescription($manga->attributes->description);
                 $mangaManager->setaverageRating($manga->attributes->averageRating || null);
-                $mangaManager->setposterImage($manga->attributes->posterImage->medium);
+                $mangaManager->setposterImage($manga->attributes->posterImage->original);
                 $mangaManager->setprix(rand(1, 20));
                 $mangaManager->setstock(rand(0, 150));
                 $em->persist($mangaManager);
@@ -88,10 +88,8 @@ class insertManga {
                 $categories = $obj->data;
                 
                 foreach ($categories as $category) {
-                   
                    $mangax = $em->getRepository(Manga::class)->findOneByTitle($manga->attributes->canonicalTitle);
                    $categoryx = $em->getRepository(Category::class)->findOneByTitle($category->attributes->title);
-                   
                     $categoryManga = new CategoryManga($mangax, $categoryx);
                     $em->persist($categoryManga);
                     $em->flush();

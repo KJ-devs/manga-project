@@ -27,6 +27,15 @@ class CategoryMangaRepository extends EntityRepository {
                 ->setParameter('idManga_id', $idManga);
         $queryBuilder->getQuery()->execute();
     }
+    public function findOneById($idManga) {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+                ->select('cm')
+                ->from(CategoryManga::class, 'cm')
+                ->where('cm.manga = :idManga_id')
+                ->setParameter('idManga_id', $idManga);
+        return $queryBuilder->getQuery()->getResult();
+    }
    
    
 }

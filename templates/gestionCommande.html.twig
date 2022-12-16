@@ -14,6 +14,11 @@
 						<a class="nav-link" href="register">Inscription</a>
 						<a class="nav-link" href="login">Connexion</a>
 					{% endif %}
+					{% if user == 'admin' %}
+						<a class="nav-link" href="gestionCommande">Gestion des Commandes</a>
+						<a class="nav-link" href="gestionManga">Gestion des mangas</a>
+						<a class="nav-link" href="insertionManga">Ajouter un manga</a>
+					{% endif %}
 					{% if user is not empty %}
 					<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
 					<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
@@ -27,30 +32,24 @@
 		<thead>
 			<tr>
 				<th scope="col">id</th>
-				<th scope="col">Image</th>
-				<th scope="col">Titre</th>
-				<th scope="col">Description</th>
-				<th scope="col">Prix</th>
-				<th scope="col">Stock</th>
-				<th scope="col">Modifier</th>
-				<th scope="col">Supprimer</th>
+				<th scope="col">id User</th>
+				<th scope="col">Date de la Commande</th>
+				<th scope="col">Statut de la commande</th>
+				<th scope="col">Prix de la commande</th>
+				<th scope="col">Frais de livraison</th>
 			</tr>
 		</thead>
-		{% for manga in mangas %}
+		{% for commande in commandes %}
 			{# send data to modifier Manga.php #}
 				<tbody>
 					<tr>
-						<th scope="row">{{manga.getid()}}</th>
-						<td><img src="{{ manga.posterImage }}" alt="{{ manga.title }}" class="img-responsive" style="width:50px;"></td>
-						<td>{{manga.gettitle()}}</td>
-						<td>{{manga.getdescription()}}</td>
-						<td>{{manga.getprix()}}</td>
-						<td>{{manga.getstock()}}</td>						
-						<td><a href="modifierManga?id={{manga.getid()}}" class='btn btn-warning'>Modifier</a></td>
-						<form action="gestionManga" name="supprimerManga" method="post">
-						<input type="hidden" name="manga" value="{{manga.getid()}}">
-						<td><input type='submit' value='Supprimer' name="supprimerManga" class='btn btn-danger'></td>
-						</form>
+						<td>{{commande.id}}</td>
+						<td>{{commande.idUser}}</td>
+						<td>{{commande.dateCommande}}</td>
+						<td>{{commande.statutCommande}}</td>
+						<td>{{commande.prixCommande}} €</td>						
+						<td>{{commande.prixLivraison}} €</td>
+						
 					</tr>
 				</tbody>
 		{% endfor %}

@@ -19,7 +19,7 @@ class verifInsertManga {
     public function verifTitle(): array {
         $em = EntityManager::getInstance();
         $manga = $em->getRepository(Manga::class)->findOneByTitle($_POST['title']);
-        if (empty($_POST['title'])) {
+        if (empty(htmlspecialchars($_POST['title']))) {
             $this->errors['title'] = 'Veuillez renseigner un titre';
         }
         if (!empty($manga)) {
@@ -31,7 +31,7 @@ class verifInsertManga {
     // verification of description if exist
 
     public function verifDescription(): array {
-        if (empty($_POST['description'])) {
+        if (empty(htmlspecialchars($_POST['description']))) {
             $this->errors['description'] = 'Veuillez renseigner une description';
         }
         return $this->errors;
@@ -42,11 +42,11 @@ class verifInsertManga {
     // verification of posterImage if exist
 
     public function verifPosterImage(): array {
-        if (empty($_POST['poster_image'])) {
-            $this->errors['poster_image'] = 'Veuillez renseigner une image';
+        if (empty(htmlspecialchars($_POST['posterImage']))) {
+            $this->errors['posterImage'] = 'Veuillez renseigner une image';
         }
-        if (!filter_var($_POST['poster_image'], FILTER_VALIDATE_URL)) {
-            $this->errors['poster_image'] = "Veuillez renseigner un lien d'une image";
+        if (!filter_var(htmlspecialchars($_POST['posterImage']), FILTER_VALIDATE_URL)) {
+            $this->errors['posterImage'] = "Veuillez renseigner un lien d'une image";
         }
         return $this->errors;
     }
@@ -56,7 +56,7 @@ class verifInsertManga {
     public function verifCategory(): array {
         $em = EntityManager::getInstance();
         $category = $em->getRepository(Category::class)->findOneByTitle($_POST['category']);
-        if (empty($_POST['category'])) {
+        if (empty(htmlspecialchars($_POST['category']))) {
             $this->errors['category'] = 'Veuillez renseigner une catégorie';
         }
         if ($category) {
@@ -69,10 +69,10 @@ class verifInsertManga {
    
 
     public function verifPrix(): array {
-        if (empty($_POST['price'])) {
+        if (empty(htmlspecialchars($_POST['price']))) {
             $this->errors['price'] = 'Veuillez renseigner un prix';
         }
-        if (!is_numeric($_POST['price'])) {
+        if (!is_numeric(htmlspecialchars($_POST['price']))) {
             $this->errors['price'] = 'Veuillez renseigner un prix en chiffre';
         }
         return $this->errors;
@@ -81,10 +81,10 @@ class verifInsertManga {
     // verification of stock if exist
 
     public function verifStock(): array {
-        if (empty($_POST['stock'])) {
-            $this->errors['stock'] = 'Veuillez renseigner un stock';
-        }
-        if (!is_numeric($_POST['stock'])) {
+        // if (empty(htmlspecialchars($_POST['stock']))) {
+        //     $this->errors['stock'] = 'Veuillez renseigner un stock';
+        // }
+        if (!is_numeric(htmlspecialchars($_POST['stock']))) {
             $this->errors['stock'] = 'Veuillez renseigner un prix en chiffre';
         }
         return $this->errors;

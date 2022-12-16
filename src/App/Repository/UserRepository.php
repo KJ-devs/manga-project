@@ -19,5 +19,20 @@ class UserRepository extends EntityRepository
             ->setParameter('email', $email);
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-    
+
+    public function updateAdress($id, $address, $city, $zipCode)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->update(User::class, 'u')
+            ->set('u.address', ':address')
+            ->set('u.city', ':city')
+            ->set('u.zipCode', ':zipCode')
+            ->where('u.id = :id')
+            ->setParameter('address', $address)
+            ->setParameter('city', $city)
+            ->setParameter('zipCode', $zipCode)
+            ->setParameter('id', $id);
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

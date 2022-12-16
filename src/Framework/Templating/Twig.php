@@ -22,6 +22,6 @@ class Twig implements TemplatingInterface
 
     public function render(Response $response): string
     {
-        return $this->twig->render($response->getTemplate(), $response->getArgs());
+        return $this->twig->render($response->getTemplate(), $response->getArgs(),$response->getJs(),$response->getLangue());
     }
 }

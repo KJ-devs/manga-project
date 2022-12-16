@@ -15,33 +15,87 @@
 			<a class="navbar-brand" href="/">GraoullyMangaStore</a>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link active" aria-current="page" href="/">Home</a>
-					<a class="nav-link" href="register">Inscription</a>
-					<a class="nav-link" href="login">Login</a>
+					<a class="nav-link active" aria-current="page" href="/">Accueil</a>
+					{% if user is  empty %}
+						<a class="nav-link" href="register">Inscription</a>
+						<a class="nav-link" href="login">Connexion</a>
+						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
+					{% endif %}
+					{% if user == 'admin' %}
+						<a class="nav-link" href="gestionCommande">Gestion des Commandes</a>
+						<a class="nav-link" href="gestionManga">Gestion des mangas</a>
+						<a class="nav-link" href="insertionManga">Ajouter un manga</a>
+					{% endif %}
+					{% if user is not empty %}
+						<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
+						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
+					{% endif %}
 				</div>
 			</div>
 		</div>
 	</nav>
-	<section style="background-color:#16324F;">
-		{% for manga in mangas %}
-			<div class="d-flex d-inline-flex">
-				<div class="p-4">
-					<div class="card" style="width:16rem;margin-left:8px;border-style:none;">
-						<img src="{{ manga.posterImage }}" class="card-img-top"  alt="...">
-						<div class="card-body bg-dark bg-gradient text-light  " style="display:flex; flex-direction:column;height:9rem; align-items:flex-start;justify-content:flex-end;">
-							<h5 class="card-title ">{{ manga.title }}</h5>
-							<p class="text-danger">
-								{{ manga.prix }}
-								€</p>
+	<body class="h-100 ">
+		<section class="h-100  " style="margin-left:2%">
+			<form action="/" name="getManga" method="POST">
+				<div class="d-flex flex-column ">
+					<div class="d-inline-flex justify-content-center mt-2 ">
+						<div class="m-2">
+							<select name="categorie[]" class="form-select  bg-dark text-light  p-2 w-auto" sty aria-label="Default select example">
+
+								<option value="" disabled selected>Catégorie</option>
+								{% for categorie in categories %}
+									<option value="{{categorie.getid()}}">{{ categorie.getcategoryTitle()}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="m-2">
+							<select name="prix" class="form-select  bg-dark text-light ml-2 p-2 w-auto" sty aria-label="Default select example">
+								<option value="" disabled selected>
+									{{prix}}
+									€</option>
+								<option value="5">Prix < 5€</option>
+								<option value="10">Prix < 10€</option>
+							</select>
 						</div>
 					</div>
-					<div class="d-flex mt-2 " style="margin-left:8px">
-						<a href="" class="btn btn-primary ">Details</a>
-						<a href="#" class="btn btn-danger " style="margin-left:10px">Ajouter au panier</a>
-					</div>
 				</div>
-			</div>
+				<div class="d-flex justify-content-center">
 
-		{% endfor %}
-	</section>
+					<input type="submit" name="getManga" class="btn btn-primary mt-2 " value="Rechercher">
+
+				</div>
+			</form>
+			{% if mangas is not empty %}
+				{% for manga in mangas %}
+					<div class="d-flex d-md-inline-flex justify-content-center">
+						<div class="p-3 ">
+							<div  style="margin-left:10px;width:fit-content;border-style:none;box-shadow: 0 0 10px 10px black;">
+								<img src="{{ manga.posterImage }}" style="object-fit: fill;height:300px;width:280px;" alt="...">
+								<div class=" bg-dark bg-gradient text-light d-flex justify-content-center " style="display:flex; width:280px;flex-direction:column;height:9rem; margin-left:align-items:flex-start;justify-content:flex-end;">
+									<h5 class="card-title " style="margin-left:20px;">{{ manga.title }}</h5>
+									<p style="margin-left:20px;color:red;">
+										{{ manga.prix }}€</p>
+								</div>
+							</div>
+							<div class="d-flex mt-3 " style="margin-left:8px">
+								<a href="produit?id={{ manga.id }}" class="btn btn-primary">Voir le Produit</a>
+								<form method="POST">
+									<input type="hidden" name="id" value="{{manga.id}}">
+									<input type="submit" name="ajouterPanier" class="btn btn-success add-to-cart" value="Ajouter au Panier" style="margin-left:10px">
+								</form>
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+			{% else %}
+				<div class="d-flex  justify-content-center align-items-center " style="height:700px;">
+
+					<h1 class="text-light">Aucun Manga trouvé</h1>
+				</div>
+			{% endif %}
+		</section>
+	</body>
+
+
 {% endblock %}

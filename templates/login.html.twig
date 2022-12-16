@@ -36,9 +36,18 @@
 										</div>
 										<div>
 										<input class="btn btn-outline-light btn-lg px-5" value="Se Connecter" name="login" type="submit">
-										</div>	
+										</div>
+										</div>
+										{% if errors is not empty %}
+											<div class="alert alert-danger " role="alert">
+												{% for listerror in errors %}
+													{{ listerror }}<br>
+												{% endfor %}
+											</div>
+										{% endif %}
 										<div>
-											<p class="mb-0">Don't have an account?
+										<div>
+											<p class="mb-0">Vous n'avez pas de compte?
 												<a href="/register" class="text- fw-bold">S'inscrire</a>
 											</p>
 										</div>

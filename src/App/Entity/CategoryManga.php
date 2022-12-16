@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\Id;
 
 #[ORM\Entity(repositoryClass: CategoryMangaRepository::class)]
-#[ORM\Table(name: 'categoriesOfEachManga')]
+#[ORM\Table(name: 'categoryManga')]
 class CategoryManga {
    
   
@@ -25,7 +25,7 @@ class CategoryManga {
         $this->manga = $idManga;
         $this->category = $idCategory;
     }
-
+    
 
 
 

@@ -18,8 +18,6 @@ class CategoryRepository extends EntityRepository {
 
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
-
-
     public function getAllCategories() {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder

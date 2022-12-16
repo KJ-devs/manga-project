@@ -1,29 +1,88 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-	<form action="insertionManga" name="insertManga" method="POST">
+	<section class="vh-100" style="background-color: #eee;">
+		<div class="container h-100">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="card text-black w-50" style="border-radius: 25px;">
+					<div class="card-body ">
+						<div class="row justify-content-center ">
+							<p class="text-center h1 mb-5 mx-1 mx-md-4 mt-4 fw-bold">Ajouter un Manga</p>
+							<form action="insertionManga" name="insertManga" method="POST" class="mx-1 mx-md-4">
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="title">Titre</label>
+										<input type="text" id="title" name="title" placeholder="Titre" class="form-control"/>
+									</div>
+								</div>
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="description">description</label>
+										<input type="text" id="description" name="description" placeholder="description" class="form-control"/>
 
-		<label for="title">Titre</label>
-		<input type="text" name="title" id="title" placeholder="titre" >
-		<label for="description">description</label>
-		<input type="text" name="description" id="description" placeholder="description" >
-		<label for="poster_image">Image</label>
-		<input type="text" name="poster_image" id="poster_image" placeholder="lien de l'image" >
-		<label for="price">Prix</label>
-		<input type="text" name="price" id="price" placeholder="Prix" >
-		<label for="stock">Stock</label>
-		<input type="text" name="stock" id="stock" placeholder="Stock" >
-		<label for="category">Catégorie</label>
-		<input type="text" name="category" id="category" placeholder="Catégorie" >
-		
-		<br>
-		{% for categorie in categories %}
-				
-				<label for="{{ categorie.getcategoryTitle()}}">{{ categorie.getcategoryTitle()}}</label>
-				<input type="checkbox" name="categorie[]" value="{{ categorie.getcategoryTitle()}}" >
-			
-    	{% endfor %}
-		<input type="submit" value="Ajouter un manga" name="insertManga">
-	</form>
-	
+									</div>
+								</div>
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="category">Ajouter une catégorie</label>
+										<input type="text" id="category" name="category" placeholder="catégorie" class="form-control"/>
+
+									</div>
+
+								</div>
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="posterImage">image</label>
+										<input type="test" id="posterImage" name="posterImage" placeholder="Url image" class="form-control"/>
+
+									</div>
+								</div>
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="price">prix</label>
+										<input type="text" id="price" name="price" placeholder="prix" class="form-control"/>
+
+									</div>
+								</div>
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<label class="form-label" for="stock">Stock</label>
+										<input type="text" id="stock" name="stock" placeholder="stock" class="form-control"/>
+
+									</div>
+								</div>
+
+								<div class="d-flex p-2 w-75 " style="margin-left:15%">
+										<select name="categorie[]" multiple="multiple " class="form-select justify-content:center " aria-label="Default select example" >
+										{% for categorie in categories %}
+											<option>{{ categorie.getcategoryTitle()}}</option>
+										{% endfor %}
+										</select>
+										</div>
+								<div class="d-flex  justify-content-center mx-4 mb-3 mb-lg-4">
+									<input type="submit" name="insertManga" class="btn btn-primary" value="Ajouter">
+
+								</div>
+							</div>
+							{% if errors is not empty %}
+								<div class="alert alert-danger " role="alert">
+									{% for listerror in errors %}
+										{{ listerror }}<br>
+									{% endfor %}
+								</div>
+							{% endif %}
+							<div></form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 {% endblock %}

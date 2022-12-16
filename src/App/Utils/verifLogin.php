@@ -6,27 +6,22 @@ use Framework\Doctrine\EntityManager;
 use App\Entity\User;
 use App\Repository\UserRepository;
 
-class verifLogin
-{
+class verifLogin {
     private array $errors = [];
 
-    public function getErrors(): array
-    {
+    public function getErrors(): array {
         return $this->errors;
     }
-    public function verifLogin(): array
-    {
+    public function verifLogin(): array {
         $em = EntityManager::getInstance();
         $user = $em->getRepository(User::class)->findOneByEmail($_POST['email']);
         if (empty($user)) {
-            $this->errors['email'] = 'Email incorrect';
+            $this->errors[] = 'Email incorrect';
         } else {
-            if (!password_verify($_POST['password'], $user->getPassword())) {
-                $this->errors['password'] = 'Mot de passe incorrect';
+            if (!password_verify(htmlspecialchars($_POST['password']), $user->getPassword())) {
+                $this->errors[] = 'Mot de passe incorrect';
             }
         }
         return $this->errors;
     }
-
-    
 }
