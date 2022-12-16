@@ -32,4 +32,10 @@ class Response
   {
       return $this->args;
   }
+  public function getJs(): array {
+    return $this->args['js'] ?? [];
+  }
+  public function getLangue(): array {
+    return $this->args['Langue'] ?? [];
+  }
 }

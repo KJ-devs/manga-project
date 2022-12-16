@@ -7,24 +7,9 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
-    public function findOneByEmail(string $email): User
+    public function findOneByEmail(string $email): User|null
     {
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
         $email = $_POST['email'];
-        $address = $_POST['address'];
-        $phone_number = $_POST['phone_number'];
-        $password = $_POST['password'];
-        
-       
-
-        // DQL way
-        /*$dql = 'SELECT u FROM ' . User::class . ' u WHERE u.email=:email';
-        $query= $this->_em->createQuery($dql);
-        $query->setParameter('email', $email);
-
-        return $query->getSingleResult();*/
-
         // query builder WAY
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
@@ -32,7 +17,22 @@ class UserRepository extends EntityRepository
             ->from(User::class, 'u')
             ->where('u.email = :email')
             ->setParameter('email', $email);
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
 
-        return $queryBuilder->getQuery()->getSingleResult();
+    public function updateAdress($id, $address, $city, $zipCode)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->update(User::class, 'u')
+            ->set('u.address', ':address')
+            ->set('u.city', ':city')
+            ->set('u.zipCode', ':zipCode')
+            ->where('u.id = :id')
+            ->setParameter('address', $address)
+            ->setParameter('city', $city)
+            ->setParameter('zipCode', $zipCode)
+            ->setParameter('id', $id);
+        return $queryBuilder->getQuery()->getResult();
     }
 }

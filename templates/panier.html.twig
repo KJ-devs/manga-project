@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#13293D">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">GraoullyMangaStore</a>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-link active" aria-current="page" href="/">Accueil</a>
+					{% if user is  empty %}
+						<a class="nav-link" href="register">Inscription</a>
+						<a class="nav-link" href="login">Connexion</a>
+						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
+					{% endif %}
+					{% if user is not empty %}
+						<a class="nav-link" href="vosCommandes" style="position:absolute; right:190px; top:5px;" >Vos Commandes</a>
+						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
+						<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</nav>
+	<table class="table">
+		<thead></thead>
+		<thead>
+			<tr>
+				<th scope="col">Image</th>
+				<th scope="col">Titre</th>
+				<th scope="col">Description</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Stock</th>
+				<th scope="col">Quantité</th>
+			</tr>
+		</thead>
+
+		{% for manga in mangas %}
+			<tbody class="product-items">
+				<tr>
+					
+					<form action="panier" name="valideCommande" method="post">
+						<td><img src="{{ manga.posterImage }}" alt="{{ manga.title }}" class="img-responsive" style="width:50px;"></td>
+						<td>{{manga.title}}</td>
+						<td>{{manga.description}}</td>
+						<td>{{manga.prix}}
+							€</td>
+						{% if manga.stock == 0 %}
+							<td style="color:red;">Pas en Stock</td>
+						{% else %}
+							<td style="color:green;">En Stock</td>
+						{% endif %}
+						<td>
+							<select name="quantite[]"class="select-product" style="width:60px;">
+								{% for i in 1..manga.stock %}
+									<option value="{{i}}">{{i}}</option>
+								{% endfor %}
+							</select>
+						</td>
+						<input type="hidden" class="idManga" name='mangaId[]' value="{{manga.id}}">
+						<input type="hidden" class="prix" name='mangaPrix[]' value="{{manga.prix}}"></tr>
+				</tr>
+			</tbody>
+		{% endfor %}
+
+	</table>
+
+
+	<div class="total">
+		<h2 class="totalPrice">
+			<h2></div>
+			{% if user is not empty %}
+			 {% if mangas is not empty %}
+				<input type="submit" class="btn btn-warning add-to-cart" name="valideCommande" value="Valider la commande">
+			</form>
+			<div id="paypal-button-container"></div>
+			{% endif %}
+		{% else %}
+			<a href="login" class="btn btn-warning ">Connexion</a>
+		{% endif %}
+	{% endblock %}

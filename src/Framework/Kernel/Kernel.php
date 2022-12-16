@@ -4,6 +4,7 @@ namespace Framework\Kernel;
 
 use Framework\Response\Response;
 use Framework\Routing\Routing;
+use Framework\Config\Config;
 use Framework\Templating\TemplatingInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -26,6 +27,28 @@ class Kernel
   public function display(Response $response)
   {
       echo $this->templating->render($response);
+  }
+  public function callJs(Response $response)
+  {
+      $js = $response->getJs();
+
+      if (!empty($js)) {
+          foreach ($js as $value) {
+              echo '<script src="' . Config::get('JS_PATH')  . $value . '"></script>';
+          }
+      }
+
+  }
+  public function callLangue(Response $response)
+  {
+      $langue = $response->getLangue();
+
+      if (!empty($langue)) {
+          foreach ($langue as $value) {
+              echo '<script src="' . Config::get('LANGUE_PATH')  . $value . '"></script>';
+          }
+      }
+
   }
 }
 

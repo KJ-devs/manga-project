@@ -1,0 +1,36 @@
+<?php
+return [
+    "FR" => [
+        "accueil" => "Accueil",
+        "inscription" => "Inscription",
+        "connexion" => "Connexion",
+        "deconnexion" => "Deconnexion",
+        "categorie" => "Catégorie",
+        "gestionManga" => "Gestion des mangas",
+        "ajouterManga" => "Ajouter un manga",
+        "panier" => "Panier",
+        "prix" => "Prix",
+        "rechercher" => "Rechercher",
+        "ajouterAuPanier" => "Ajouter au panier",
+        "supprimer" => "Supprimer",
+        "modifier" => "Modifier",
+        "ajouter" => "Ajouter",
+    ],
+
+    "EN" => [
+        "accueil" => "Home",
+        "inscription" => "Sign up",
+        "connexion" => "Log in",
+        "deconnexion" => "Log out",
+        "categorie" => "Category",
+        "gestionManga" => "Manage manga",
+        "ajouterManga" => "Add a manga",
+        "panier" => "Cart",
+        "prix" => "Price",
+        "rechercher" => "Search",
+        "ajouterAuPanier" => "Add to cart",
+        "supprimer" => "Delete",
+        "modifier" => "Modify",
+        "ajouter" => "Add",
+    ],
+];
