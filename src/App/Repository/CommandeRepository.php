@@ -62,4 +62,12 @@ class CommandeRepository extends EntityRepository {
             ->setParameter('id', $idcommande);
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function updateCommande($idCommande, $statutCommande) {
+        $em = EntityManager::getInstance();
+        $commande = $this->find($idCommande);
+        $commande->setStatutCommande($statutCommande);
+        $em->persist($commande);
+        $em->flush();
+    }
 }

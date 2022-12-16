@@ -88,7 +88,7 @@ class Panier {
             }
             
             
-            
+            echo '<script>alert("Votre commande a bien été prise en compte")</script>';
         }
 
         return new Response('panier.html.twig', ['mangas' => $AllManga, 'user' => $userRole, 'js' => ['panier.js', 'paypal.js']]);

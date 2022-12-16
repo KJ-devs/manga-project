@@ -18,7 +18,7 @@ class verifLogin {
         if (empty($user)) {
             $this->errors[] = 'Email incorrect';
         } else {
-            if (!password_verify(htmlspecialchars($_POST['password']), $user->getPassword())) {
+            if (!password_verify($_POST['password'], $user->getPassword())) {
                 $this->errors[] = 'Mot de passe incorrect';
             }
         }

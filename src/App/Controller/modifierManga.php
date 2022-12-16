@@ -41,6 +41,7 @@ class modifierManga {
                 $category = new Category();
                 $manga->updateManga($id);  
                 $category->setcategoryTitle($_POST['category']);
+                $manga = $em->getRepository(Manga::class)->findOneById($id);
                 $categoryManga = new CategoryManga($manga, $category);
                 $em->persist($category);
                 $em->persist($categoryManga);
@@ -53,7 +54,7 @@ class modifierManga {
                     $em->flush();
                 }
             }
-           
+            header('Location: /gestionManga');
         }
 
 

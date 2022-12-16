@@ -35,7 +35,7 @@ paypal.Buttons({
                             type: "SHIPPING",
                             selected: false,
                             amount: {
-                                value: 3,
+                                value: shippingPrice,
                                 currency_code: "EUR"
                             }
                         },
@@ -45,7 +45,7 @@ paypal.Buttons({
                             type: "PICKUP",
                             selected: false,
                             amount: {
-                                value: 3,
+                                value: shippingPrice,
                                 currency_code: "EUR"
                             }
                         }

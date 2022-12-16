@@ -27,6 +27,13 @@ class gestionCommande {
         } else {
             header('Location: /');
         }
+        if (isset($_POST['modifierCommande'])) {
+            $idCommande = $_POST['idCommande'];
+            
+            $statuteCommande = $_POST['statutCommande'];
+            $CommandeRepository->updateCommande($idCommande, $statuteCommande);
+            header('Location: /gestionCommande');
+        }
         return new Response('gestionCommande.html.twig', ['commandes' => $getAllCommande, 'user' => $userRole]);
     }
 }

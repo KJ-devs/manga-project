@@ -26,8 +26,4 @@ class CategoryManga {
         $this->category = $idCategory;
     }
     
-
-
-
-
 }

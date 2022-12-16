@@ -28,6 +28,7 @@
 			</div>
 		</div>
 	</nav>
+	<h1 style="text-align:center;">Toutes les commandes Client</h1>
 	<table class="table">
 		<thead></thead>
 		<thead>
@@ -36,21 +37,30 @@
 				<th scope="col">id User</th>
 				<th scope="col">Date de la Commande</th>
 				<th scope="col">Statut de la commande</th>
-				<th scope="col">Prix de la commande</th>
+				<th scope="col">Prix de la commande (frais de livraison incluse)</th>
 				<th scope="col">Frais de livraison</th>
+				<th scope="col">Modifier</th>
 			</tr>
 		</thead>
 		{% for commande in commandes %}
 			{# send data to modifier Manga.php #}
+			<form action="gestionCommande" method="post">
 				<tbody>
 					<tr>
 						<td>{{commande.id}}</td>
 						<td>{{commande.idUser}}</td>
 						<td>{{commande.dateCommande}}</td>
-						<td>{{commande.statutCommande}}</td>
-						<td>{{commande.prixCommande}} €</td>						
+						<td><select name="statutCommande"style="object-fit:cover;">
+                            <option value="{{commande.statutCommande}}" selected >{{commande.statutCommande}}</option>
+							<option value="Livrer">Livrer</option>
+                            <option value="En Livraison">En Livraison</option>
+                            </select></td>
+						<td>{{commande.prixCommande}} € </td>						
 						<td>{{commande.prixLivraison}} €</td>
 						
+						<td><input type="hidden" name="idCommande" value="{{commande.id}}">
+						<input type="submit" value="Modifier" name="modifierCommande" class="btn btn-primary"></td>
+						</form>
 					</tr>
 				</tbody>
 		{% endfor %}

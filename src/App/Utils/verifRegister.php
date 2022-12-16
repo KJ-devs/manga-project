@@ -12,7 +12,7 @@ class verifRegister {
     }
 
     function verifEmail() {
-        if (!filter_var(htmlspecialchars($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var(($_POST['email']), FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "L'email n'est pas valide";
             
         }
@@ -20,25 +20,25 @@ class verifRegister {
     }
     function verifPassword() {
         
-        if (!preg_match('`[A-Z]`', htmlspecialchars($_POST['password']))) {
+        if (!preg_match('`[A-Z]`', $_POST['password'])) {
             $this->errors['password'] = "Le mot de passe doit contenir au moins une majuscule";
             
         }
-        if (!preg_match('`[a-z]`', htmlspecialchars($_POST['password']))) {
+        if (!preg_match('`[a-z]`', $_POST['password'])) {
             $this->errors['password'] = "Le mot de passe doit contenir au moins une minuscule";
             
         }
 
-        if (!strlen(htmlspecialchars($_POST['password'])) > 6) {
+        if (!strlen($_POST['password']) > 6) {
             $this->errors['password'] = "Le mot de passe doit contenir au moins 6 caractères";
             
         }
 
-        if (!preg_match('`[0-9]`',htmlspecialchars($_POST['password']))) {
+        if (!preg_match('`[0-9]`',$_POST['password'])) {
             $this->errors['password'] = "Le mot de passe doit contenir au moins un chiffre";
             
         }
-        if (htmlspecialchars(($_POST['password'])) != htmlspecialchars($_POST['password_confirm'])) {
+        if ((($_POST['password'])) != ($_POST['password_confirm'])) {
             $this->errors['password'] = "Les mots de passe ne correspondent pas";
             
         }
@@ -46,7 +46,7 @@ class verifRegister {
     }
     function verifAddress() {
         
-        if (!preg_match('`[0-9]`', htmlspecialchars($_POST['address']))) {
+        if (!preg_match('`[0-9]`', $_POST['address'])) {
             $this->errors['address'] = "L'adresse doit contenir au moins un chiffre";
             
         }
@@ -54,14 +54,14 @@ class verifRegister {
     }
     function verifCity() {
         
-        if (!preg_match('`[A-Z]`', htmlspecialchars($_POST['city']))) {
+        if (!preg_match('`[A-Z]`', $_POST['city'])) {
             $this->errors['city'] = "La ville doit contenir au moins une majuscule";
             
         }
         return $this->errors;
     }
     function verifZipCode() {
-        if (!preg_match ("~^[0-9]{5}$~",htmlspecialchars($_POST['zipCode']))) {
+        if (!preg_match ("~^[0-9]{5}$~",$_POST['zipCode'])) {
             $this->errors['zipCode'] = "Le code postal doit contenir 5 chiffres";
 
         }
