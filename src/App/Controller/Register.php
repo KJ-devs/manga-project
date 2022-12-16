@@ -18,7 +18,7 @@ class Register {
     if (isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
       $userRole = $user->getRole();
-    } 
+    }  
     $verification = new verifRegister;
 
     if (isset($_POST['inscription'])) {
@@ -32,10 +32,10 @@ class Register {
         $user->setCity(htmlspecialchars($_POST['city']));
         $user->setZipCode(htmlspecialchars($_POST['zipCode']));
         if ($_SESSION != null) {
-          if ($_SESSION['user']->getRole() == 'admin') {
-            $user->setRole($_POST['role']);
-          } else {
+          if($_SESSION['user'] == null) {
             $user->setRole('user');
+          } else {
+            $user->setRole($_SESSION['user']->getRole());
           }
         }
         $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));

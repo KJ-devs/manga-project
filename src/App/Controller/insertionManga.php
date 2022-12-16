@@ -17,6 +17,7 @@ class insertionManga {
             header('Location: /');
             exit();
         };
+        
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
             $userRole = $user->getRole();
