@@ -15,6 +15,7 @@
 						<a class="nav-link" href="login">Connexion</a>
 					{% endif %}
 					{% if user is not empty %}
+					<a class="nav-link" href="vosCommandes" style="position:absolute; right:190px; top:5px;" >Vos Commandes</a>
 					<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
 					<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
 					{% endif %}

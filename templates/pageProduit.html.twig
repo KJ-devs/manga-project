@@ -13,12 +13,12 @@
 						<a class="nav-link" href="login">Connexion</a>
 						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
 					{% endif %}
-					{% if user == 'admin' %}
-					
+					{% if user == 'admin' %}		
 						<a class="nav-link" href="gestionManga">Gestion des mangas</a>
 						<a class="nav-link" href="insertionManga">Ajouter un manga</a>
 					{% endif %}
 					{% if user is not empty %}
+					<a class="nav-link" href="vosCommandes" style="position:absolute; right:190px; top:5px;" >Vos Commandes</a>
 						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
 					<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
 					{% endif %}

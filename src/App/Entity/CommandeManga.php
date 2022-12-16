@@ -35,4 +35,45 @@ class CommandeManga {
         
 
     }
+
+    public function getCommande(): Commande|null {
+        return $this->commande;
+    }
+
+    public function setCommande(Commande $commande): self {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getManga(): Manga|null {
+        return $this->manga;
+    }
+
+    public function setManga(Manga $manga): self {
+        $this->manga = $manga;
+
+        return $this;
+    }
+
+    public function getQuantite(): int {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getPrix(): int {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self {
+        $this->prix = $prix;
+
+        return $this;
+    }
+    
 }

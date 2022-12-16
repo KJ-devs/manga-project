@@ -4,7 +4,7 @@
 {% endblock %}
 {% block stylesheets %}{% endblock %}
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#13293D">
+	<nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#13293D">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/">GraoullyMangaStore</a>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -20,9 +20,9 @@
 						<a class="nav-link" href="insertionManga">Ajouter un manga</a>
 					{% endif %}
 					{% if user is not empty %}
-					<a class="nav-link" href="vosCommandes" style="position:absolute; right:190px; top:5px;" >Vos Commandes</a>
-					<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
-					<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
+						<a class="nav-link" href="vosCommandes" style="position:absolute; right:190px; top:5px;">Vos Commandes</a>
+						<a class="nav-link" href="panier"><img src="img/panier.png" style="width:50px;position:absolute; right:150px; top:5px;"></a>
+						<a class="nav-link active" href="?deconnexion=1" style="position:absolute; right:50px; top:5px;">Deconnexion</a>
 					{% endif %}
 				</div>
 			</div>
@@ -32,27 +32,23 @@
 		<thead></thead>
 		<thead>
 			<tr>
-				<th scope="col">id</th>
-				<th scope="col">id User</th>
-				<th scope="col">Date de la Commande</th>
-				<th scope="col">Statut de la commande</th>
-				<th scope="col">Prix de la commande</th>
-				<th scope="col">Frais de livraison</th>
+                <th scope="col">Cover</th>
+				<th scope="col">Manga</th>
+				<th scope="col">Quantite</th>
+				<th scope="col">Prix du manga</th>
+
 			</tr>
 		</thead>
 		{% for commande in commandes %}
 			{# send data to modifier Manga.php #}
-				<tbody>
-					<tr>
-						<td>{{commande.id}}</td>
-						<td>{{commande.idUser}}</td>
-						<td>{{commande.dateCommande}}</td>
-						<td>{{commande.statutCommande}}</td>
-						<td>{{commande.prixCommande}} €</td>						
-						<td>{{commande.prixLivraison}} €</td>
-						
-					</tr>
-				</tbody>
+			<tbody>
+				<tr>
+                    <td><img class="img-responsive" style="width:50px;" src="{{commande.getManga().getposterImage()}}"</td>
+					<td>{{commande.getManga().gettitle()}}</td>
+					<td>{{commande.quantite}}</td>
+					<td>{{commande.prix}}€</td>
+				</tr>
+			</tbody>
 		{% endfor %}
 	</table>
 {% endblock %}

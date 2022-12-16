@@ -6,7 +6,7 @@ use Framework\Response\Response;
 use Framework\Doctrine\EntityManager;
 use App\entity\Commande;
 
-class vosCommandes {
+class detailCommande {
     public function __invoke() {
         session_start();
         $em = EntityManager::getInstance();
@@ -22,8 +22,9 @@ class vosCommandes {
             $user = $_SESSION['user'];
             $userRole = $user->getRole();
         }
-         $getAllCommande = $CommandeRepository->getAllCommandeByUserId($_SESSION['user']->getId());
-         
-        return new Response('vosCommandes.html.twig', ['commandes' => $getAllCommande, 'user' => $userRole]);
+        $idCommande = $_GET['id'];
+        $getAllCommande = $CommandeRepository->getCommandeMangaByCommande($idCommande);
+
+        return new Response('detailCommande.html.twig', ['commandes' => $getAllCommande, 'user' => $userRole]);
     }
 }

@@ -24,7 +24,6 @@ class Panier {
             header('Location: /');
             exit();
         };
-
         $id = array_keys($_SESSION['panier']);
         foreach ($id as $idManga) {
             $manga = $em->getRepository(Manga::class);
